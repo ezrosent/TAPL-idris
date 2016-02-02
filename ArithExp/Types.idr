@@ -98,10 +98,10 @@ progress TruT   = Left TruValue
 progress FalsT  = Left FalsValue
 progress (IfT {tcase=tcase} {fcase=fcase} x y z) =
   case progress x of
-       Left TruValue        => Right $ (tcase ** IfTrue)
-       Left FalsValue       => Right $ (fcase ** IfFalse)
+       Left TruValue        => Right (tcase ** IfTrue)
+       Left FalsValue       => Right (fcase ** IfFalse)
        Left (NumsValues nv) => absurd (boolNotNum x nv)
-       Right (red ** step)  => Right  ((IF red tcase fcase) ** IfStep step)
+       Right (red ** step)  => Right ((IF red tcase fcase) ** IfStep step)
 progress (IsZeroT x) =
   case progress x of
        Left TruValue                => absurd x
